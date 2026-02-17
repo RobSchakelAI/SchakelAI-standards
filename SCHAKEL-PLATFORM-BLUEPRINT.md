@@ -1,6 +1,6 @@
 # Schakel Platform Blueprint
 
-> **Versie:** 0.1 — Draft
+> **Versie:** 0.2 — Draft (Scout integration)
 > **Datum:** 17 februari 2026
 > **Auteurs:** Rob & Simon (Schakel AI B.V.) + Claude
 > **Status:** Levend document — wordt aangescherpt met elke build
@@ -16,9 +16,10 @@ Het combineert:
 - De technische lessen uit MAP (Meeting Automation Platform)
 - De gecodificeerde patronen uit B2B-SAAS-SKILLS
 - De Founders Context Brief (wie we zijn en hoe we denken)
+- **Schakel Scout** (het kennisbeheersysteem dat het compounding effect aandrijft)
 - Ontwerprichtlijnen en deployment-ervaring
 
-Het doel: één blauwdruk die beschrijft hoe het Schakel Platform werkt — van module tot deployment, van eerste klantgesprek tot draaiend systeem.
+Het doel: één blauwdruk die beschrijft hoe het Schakel Platform werkt — van module tot deployment, van eerste klantgesprek tot draaiend systeem, en hoe de kennis die dat alles voedt systematisch wordt beheerd.
 
 ---
 
@@ -43,23 +44,28 @@ Een kleermaker met standaardpatronen voor jasjes, broeken en vesten. Elke klant 
 | Kleermaker | Rob + Claude |
 | Verkoper | Simon |
 
-### Drie producttypes, één platform
+### Vier componenten, één ecosysteem
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                    SCHAKEL PLATFORM                          │
-├─────────────┬──────────────────────┬────────────────────────┤
-│  SaaS       │  Operations Centers  │  Service Projects      │
-│  Products   │  (de kern)           │  (voeden het platform) │
-├─────────────┼──────────────────────┼────────────────────────┤
-│ MAP         │ Easydash             │ Junea Buurtscout       │
-│ LinkedIn    │ DRG                  │ Nirint discovery       │
-│ Tool        │ Klant 3..N           │ Toekomstige pilots     │
-├─────────────┼──────────────────────┼────────────────────────┤
-│ Multi-tenant│ Per-client deploy    │ Standalone of          │
-│ single      │ eigen database       │ module-bijdrage        │
-│ deployment  │ eigen domein         │                        │
-└─────────────┴──────────────────────┴────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────┐
+│                       SCHAKEL ECOSYSTEEM                            │
+├────────────┬───────────────────┬──────────────────┬─────────────────┤
+│ Schakel    │  SaaS             │ Operations       │ Service         │
+│ Scout      │  Products         │ Centers (kern)   │ Projects        │
+├────────────┼───────────────────┼──────────────────┼─────────────────┤
+│ Kennis-    │ MAP               │ Easydash         │ Junea Scout     │
+│ beheer +   │ LinkedIn Tool     │ DRG              │ Nirint          │
+│ auto-      │                   │ Klant 3..N       │ Toekomstige     │
+│ harvest    │                   │                  │ pilots          │
+├────────────┼───────────────────┼──────────────────┼─────────────────┤
+│ Beheert    │ Multi-tenant      │ Per-client       │ Standalone of   │
+│ schakel-   │ single deploy     │ eigen database   │ module-         │
+│ core repo  │                   │ eigen domein     │ bijdrage        │
+└────────────┴───────────────────┴──────────────────┴─────────────────┘
+      │                                    ▲
+      │ schakel-core (skills/rules/        │ Learnings vloeien
+      │ patterns) voedt alle builds        │ terug via Scout
+      └────────────────────────────────────┘
 ```
 
 **SaaS Products** (MAP, LinkedIn): Multi-tenant, één deployment, gedeelde database met RLS. Secundaire inkomstenstroom en visitekaartje. MAP is ook het R&D-lab waar nieuwe patronen worden getest.
@@ -608,7 +614,145 @@ Dag 14: Live
 
 ---
 
-## 7. De Rob + Claude + Simon Workflow
+## 7. Schakel Scout — De Kennismotor
+
+Het vliegwiel uit sectie 6 beschrijft hoe elke klant het platform verrijkt. Maar dat vliegwiel draait alleen als kennis **systematisch** wordt vastgelegd, bijgewerkt en verdeeld. Zonder systeem is kennisdeling ad-hoc: je onthoudt iets, zoekt het op, past het misschien toe. Met de Scout wordt het machinaal.
+
+### Wat de Scout doet
+
+Schakel Scout is een interne web-applicatie die twee kennisstromen beheert:
+
+1. **Extern**: Wekelijks automatisch het web afscannen naar nieuwe best practices, patronen en tooling-updates voor onze stack — en die als concrete voorstellen aanbieden
+2. **Intern**: Centraal beheer van alle skills, rules en patterns die onze projecten voeden — zodat een verbetering in MAP automatisch beschikbaar is voor Easydash, DRG, en elk toekomstig project
+
+```
+┌────────────────────────────────────────────────────────────┐
+│                     SCHAKEL SCOUT                           │
+│                                                            │
+│  ┌─────────────────┐           ┌─────────────────────┐    │
+│  │ Knowledge Hub   │           │ External Scout       │    │
+│  │                 │           │                      │    │
+│  │ Browse, search, │           │ Perplexity harvests  │    │
+│  │ create, edit    │           │ Opus 4.6 analyseert  │    │
+│  │ skills/rules/   │           │ Voorstellen ter      │    │
+│  │ patterns        │           │ review               │    │
+│  └────────┬────────┘           └──────────┬───────────┘    │
+│           │                               │                │
+│           └───────────┬───────────────────┘                │
+│                       ▼                                    │
+│              ┌─────────────────┐                           │
+│              │  schakel-core   │  (Private GitHub repo)    │
+│              │  Git = source   │                           │
+│              │  of truth       │                           │
+│              └────────┬────────┘                           │
+└───────────────────────┼────────────────────────────────────┘
+                        │ git pull (per project)
+           ┌────────────┼────────────────┐
+           ▼            ▼                ▼
+     ┌──────────┐ ┌──────────┐    ┌──────────┐
+     │   MAP    │ │ Easydash │    │   DRG    │
+     │   SaaS   │ │ Ops Ctr  │    │ Ops Ctr  │
+     └──────────┘ └──────────┘    └──────────┘
+```
+
+### Drie kennistypes
+
+| Type | Doel | Voorbeeld | Claude Code locatie |
+|------|------|-----------|---------------------|
+| **Skills** | On-demand kennis die Claude laadt wanneer relevant | `drizzle-patterns.md`, `react-conventions.md` | `.claude/skills/<naam>/SKILL.md` |
+| **Rules** | Altijd-actieve instructies per sessie | `error-handling.md`, `code-style.md` | `.claude/rules/<naam>.md` |
+| **Patterns** | Architectuurreferenties voor nieuwe features | `webhook-handling.md`, `multi-tenant.md` | Referentie (niet direct geladen) |
+
+### Het compounding mechanisme
+
+```
+EXTERN (wereld leert)                    INTERN (wij leren)
+        │                                        │
+        ▼                                        ▼
+Perplexity scant wekelijks          Rob bouwt in MAP/Easydash/DRG
+        │                                        │
+        ▼                                        ▼
+Opus 4.6 analyseert                 Ontdekt betere aanpak
+vs. huidige kennis                          │
+        │                                   ▼
+        ▼                           Updatet via Scout UI
+Voorstellen in Scout UI                     │
+        │                                   │
+        ▼                                   ▼
+Rob reviewt (< 15 min/week)    ─────► schakel-core (git)
+                                            │
+                                   git pull per project
+                                            │
+                               ┌────────────┼────────────┐
+                               ▼            ▼            ▼
+                             MAP      Easydash        DRG
+                          (profiteert van alles wat eerder geleerd is)
+```
+
+**Zonder Scout:** Kennis zit in Rob's hoofd en verspreid over projecten. Ad hoc, inconsistent.
+**Met Scout:** Kennis is gecentraliseerd, versioned, doorzoekbaar, en automatisch verrijkt. Elke maandagochtend is de hele development setup een stukje slimmer.
+
+### Harvest pipeline (wekelijks)
+
+| Fase | Service | Wat het doet |
+|------|---------|-------------|
+| **1. Harvest** | Perplexity Sonar API | 15-20 queries over 3 domeinen (claude-code, fullstack, ai-workflows) |
+| **2. Analyse** | Claude Opus 4.6 API | Vergelijkt bevindingen met huidige kennis. Genereert voorstellen: create / update / deprecate |
+| **3. Review** | Scout UI | Rob beoordeelt voorstellen. Approve → auto-commit naar schakel-core |
+
+**Kosten:** ~€8/maand (Perplexity + Opus API calls). ROI: één vermeden fout of één betere pattern per maand betaalt dit 100x terug.
+
+### Source of Truth principe
+
+- **Git (schakel-core repo)** = source of truth voor **content**. De daadwerkelijke skill/rule/pattern bestanden.
+- **Database (Neon)** = source of truth voor **metadata**. Tags, bronverwijzingen, versiegeschiedenis, rapportdata, voorstelstatussen.
+- **Sync:** Bij startup en elke 5 minuten scant de app de repo op wijzigingen. Bestanden in git maar niet in DB → metadata record aanmaken. Bestanden in DB maar verwijderd uit git → markeren als deleted.
+
+### Scout tech stack
+
+| Component | Technologie | Waarom |
+|-----------|-------------|--------|
+| Frontend | React 18 + TypeScript + Vite + shadcn/ui | Standaard Schakel stack |
+| Backend | Express.js + TypeScript | Standaard Schakel stack |
+| Database | Neon PostgreSQL + Drizzle ORM | Standaard Schakel stack |
+| Git | simple-git (Node.js) | Clone, pull, commit, push naar schakel-core |
+| Search | Perplexity Sonar API | Externe kennisharvest |
+| Analysis | Anthropic Opus 4.6 API | Intelligente vergelijking en voorstellen |
+| Scheduling | node-cron | Wekelijkse harvest (zondag 03:00) |
+
+### Relatie tot het Platform Blueprint
+
+De Scout **beheert** de kennis. Het Platform Blueprint **gebruikt** die kennis.
+
+```
+Scout beheert schakel-core:
+  skills/drizzle-patterns.md
+  rules/error-handling.md
+  patterns/multi-tenant.md
+  patterns/webhook-handling.md
+  ...
+
+Platform projecten consumeren schakel-core:
+  MAP:      git pull → .claude/skills/, .claude/rules/
+  Easydash: git pull → .claude/skills/, .claude/rules/
+  DRG:      git pull → .claude/skills/, .claude/rules/
+```
+
+B2B-SAAS-SKILLS (het 276KB document) wordt op termijn **opgesplitst** in individuele skills en patterns binnen schakel-core, beheerd via de Scout. Het document blijft bestaan als referentie, maar de levende kennis zit in schakel-core.
+
+### Bouwvolgorde Scout (geschat: 15-20 uur)
+
+| Sprint | Scope | Uren |
+|--------|-------|------|
+| 1. Fundament | Repo setup, DB schema, git integration, sync | 3-4 |
+| 2. Knowledge Hub | CRUD, filters, markdown editor, versiegeschiedenis | 3-4 |
+| 3. External Scout | Perplexity + Opus pipeline, rapporten | 4-5 |
+| 4. Review Flow | Approve/reject/edit, auto-commit | 2-3 |
+| 5. Settings & Polish | Query management, schedule, seed data | 2-3 |
+
+---
+
+## 8. De Rob + Claude + Simon Workflow
 
 ### Hoe een Operations Center wordt gebouwd
 
@@ -655,7 +799,7 @@ Elke keer dat Rob een probleem oplost, wordt de oplossing gedocumenteerd in B2B-
 
 ---
 
-## 8. Per-Client Deployment — Gedetailleerd
+## 9. Per-Client Deployment — Gedetailleerd
 
 ### Infrastructuur per klant
 
@@ -708,7 +852,7 @@ Platform update beschikbaar
 
 ---
 
-## 9. Module Catalogus (huidige en geplande)
+## 10. Module Catalogus (huidige en geplande)
 
 ### Status per module
 
@@ -738,7 +882,7 @@ Platform update beschikbaar
 
 ---
 
-## 10. Kwaliteitsstandaarden
+## 11. Kwaliteitsstandaarden
 
 ### Overgenomen uit B2B-SAAS-SKILLS (productie-gevalideerd)
 
@@ -782,7 +926,7 @@ Platform update beschikbaar
 
 ---
 
-## 11. Risico's en Mitigatie
+## 12. Risico's en Mitigatie
 
 | Risico | Impact | Mitigatie |
 |--------|--------|----------|
@@ -794,7 +938,7 @@ Platform update beschikbaar
 
 ---
 
-## 12. Eerste Stappen (Q1-Q2 2026)
+## 13. Eerste Stappen (Q1-Q2 2026)
 
 ### Nu → Easydash live
 
@@ -806,25 +950,33 @@ Platform update beschikbaar
 6. **Easydash deployen** op eigen infra
 7. **Feedback verwerken**, modules verfijnen
 
+### Parallel: Schakel Scout bouwen
+
+8. **Scout v1 bouwen** (15-20 uur — zie sectie 7)
+9. **schakel-core repo** aanmaken met initiële content (bestaande skills/rules migreren)
+10. **Wekelijkse harvest** activeren — elke maandag review van externe inzichten
+11. **B2B-SAAS-SKILLS opsplitsen** in individuele skills/rules/patterns in schakel-core
+
 ### Parallel: MAP en LinkedIn als SaaS
 
-8. **MAP lanceren** op map.schakel.ai (dev → productie merge)
-9. **LinkedIn tool lanceren** (testgebruikers zoeken)
-10. **Eerste SaaS-inkomsten** genereren (passief)
+12. **MAP lanceren** op map.schakel.ai (dev → productie merge)
+13. **LinkedIn tool lanceren** (testgebruikers zoeken)
+14. **Eerste SaaS-inkomsten** genereren (passief)
 
 ### Na Easydash: DRG valideren
 
-11. **DRG configuratie** opstellen
-12. **HR en Scheduling modules** bouwen
-13. **DRG deployen** — als dit significant sneller gaat dan Easydash, werkt het vliegwiel
-14. **Module catalogus documenteren** voor Simon's sales gesprekken
+15. **DRG configuratie** opstellen
+16. **HR en Scheduling modules** bouwen
+17. **DRG deployen** — als dit significant sneller gaat dan Easydash, werkt het vliegwiel
+18. **Module catalogus documenteren** voor Simon's sales gesprekken
 
-### Doorlopend: Standards onderhouden
+### Doorlopend: Kennis systematisch laten compounderen
 
-15. **B2B-SAAS-SKILLS** compleet maken
-16. **Dit blueprint** bijwerken na elke klant
-17. **CLAUDE.md per project** up-to-date houden
-18. **Kwartaalreview**: werkt het model? Wat moet bijgestuurd?
+19. **Scout wekelijkse reviews** (< 15 min/week)
+20. **Learnings uit elke build** terugvoeren naar schakel-core via Scout
+21. **Dit blueprint** bijwerken na elke klant
+22. **CLAUDE.md per project** up-to-date houden
+23. **Kwartaalreview**: werkt het model? Wat moet bijgestuurd?
 
 ---
 
@@ -837,6 +989,8 @@ Platform update beschikbaar
 | **Operations Center** | Een op maat geconfigureerd systeem voor een MKB-klant |
 | **Client Config** | Het configuratiebestand dat bepaalt hoe het platform zich gedraagt voor een klant |
 | **B2B-SAAS-SKILLS** | Het technische naslagwerk met productie-gevalideerde patronen |
+| **Schakel Scout** | Interne web-app die schakel-core beheert: kennishub + geautomatiseerde externe harvest |
+| **schakel-core** | Private GitHub repo met skills, rules en patterns — de levende kennisbasis |
 | **Pak-metafoor** | Standaard patronen, unieke combinaties per klant |
 | **Compounding** | Elke build verrijkt het platform, elke volgende build gaat sneller |
 | **Managed Operations Partner** | Schakels positionering: niet projecten opleveren, maar systemen beheren |
