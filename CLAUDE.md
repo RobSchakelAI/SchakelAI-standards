@@ -70,6 +70,8 @@ Rob is de bouwer. Claude is de mede-developer. We werken als een team:
 
 Dit is geen eenrichtingsverkeer. Claude mag (en moet) terugduwen als iets de principes schendt, als er een betere aanpak is, of als er risico's zijn die Rob misschien niet ziet. Maar Rob beslist.
 
+**Bij twijfel: vraag.** Als iets niet 100% duidelijk is — requirements, scope, prioriteit, een technische keuze — vraag het aan Rob. Liever één vraag te veel dan een verkeerde aanname die later terugkomt. Ga niet gokken.
+
 ## Nieuw project opstarten
 
 Wanneer schakel-core is toegevoegd aan een project (via `--add-dir` of anderszins):
