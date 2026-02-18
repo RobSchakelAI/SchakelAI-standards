@@ -14,12 +14,12 @@ Elk Schakel-project (MAP, Easydash, DRG, LinkedIn-tool, etc.) haalt kennis uit d
 schakel-core/
 ├── CLAUDE.md          # Dit bestand — AI-assistentinstructies
 ├── README.md          # Wat deze repo is, waarom, hoe te gebruiken
-├── radar.md           # Brede scanning-config voor externe kennisoogst
 ├── skills/            # Actionable how-to kennis (on-demand, pull wanneer nodig)
 ├── patterns/          # Architectuur-referentiedocumenten (blauwdrukken, ontwerpen)
 ├── rules/             # Altijd-actieve standaarden (verplicht in elk project)
 ├── context/           # Wie we zijn, visie, strategie, businessmodel
 └── harvest/           # Output van radar-scans (concepten voor promotie)
+    └── radar.md       # Brede scanning-config voor externe kennisoogst
 ```
 
 ## Drie kennistypes
@@ -105,9 +105,9 @@ Dit signaleert dat kennis uit het huidige project vastgelegd moet worden in scha
 
 ## Harvest workflow
 
-De `radar.md` definieert brede gebieden om externe kennis te scannen. De harvest-workflow werkt als volgt:
+De `harvest/radar.md` definieert brede gebieden om externe kennis te scannen. De harvest-workflow werkt als volgt:
 
-1. **Scan**: Claude Code + WebSearch onderzoekt gebieden uit `radar.md`
+1. **Scan**: Claude Code + WebSearch onderzoekt gebieden uit `harvest/radar.md`
 2. **Vergelijk**: Resultaten worden vergeleken met bestaande kennis in schakel-core
 3. **Concept**: Nieuwe of bijgewerkte content wordt naar `harvest/` geschreven
 4. **Review**: Concepten worden beoordeeld op relevantie en kwaliteit

@@ -18,8 +18,6 @@ Zonder schakel-core is kennis ad-hoc — verspreid over chats, commit messages, 
 schakel-core/
 ├── CLAUDE.md          # AI assistant instructies
 ├── README.md          # Dit bestand
-├── radar.md           # Externe scan-configuratie voor harvest
-│
 ├── skills/            # Hoe je iets bouwt (on-demand)
 │   └── B2B-SAAS-INFRASTRUCTURE.md   # Comprehensive skills reference (276KB)
 │
@@ -36,6 +34,7 @@ schakel-core/
 │   └── vision.md                    # Van AI Agency naar Managed Operations Partner
 │
 └── harvest/           # Radar scan output (drafts)
+    ├── radar.md               # Externe scan-configuratie
     └── .gitkeep
 ```
 
@@ -70,10 +69,10 @@ schakel-core/
 
 ### De Harvest Workflow
 
-schakel-core groeit niet alleen door eigen builds, maar ook door externe kennis. `radar.md` definieert brede gebieden om te scannen (Claude Code ecosystem, AI coding tools, B2B SaaS patterns, etc.).
+schakel-core groeit niet alleen door eigen builds, maar ook door externe kennis. `harvest/radar.md` definieert brede gebieden om te scannen (Claude Code ecosystem, AI coding tools, B2B SaaS patterns, etc.).
 
 **Wekelijks:**
-1. Claude Code scant breed op de gebieden in radar.md
+1. Claude Code scant breed op de gebieden in harvest/radar.md
 2. Vergelijkt met bestaande kennis
 3. Stelt nieuwe/bijgewerkte content voor via PRs
 4. Rob reviewed en merged
