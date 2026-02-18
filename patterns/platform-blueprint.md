@@ -1001,6 +1001,7 @@ Platform update beschikbaar
 ```
 schakel-core/
 ├── CLAUDE.md                         ← AI-assistentinstructies
+├── CONTEXT.md                        ← Status, planning, to-do's
 ├── README.md                         ← Wat deze repo is
 ├── skills/                           ← B2B SaaS Infrastructure Skills (10 bestanden)
 │   ├── 00-introduction.md            ← Intro, brownfield guide, architectuuroverzicht

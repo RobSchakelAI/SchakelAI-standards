@@ -13,6 +13,7 @@ Elk Schakel-project (MAP, Easydash, DRG, LinkedIn-tool, etc.) haalt kennis uit d
 ```
 schakel-core/
 ├── CLAUDE.md          # Dit bestand — AI-assistentinstructies
+├── CONTEXT.md         # Status, planning, to-do's van deze repo
 ├── README.md          # Wat deze repo is, waarom, hoe te gebruiken
 ├── skills/            # Actionable how-to kennis (on-demand, pull wanneer nodig)
 ├── patterns/          # Architectuur-referentiedocumenten (blauwdrukken, ontwerpen)
@@ -59,30 +60,63 @@ Voorbeelden:
 
 **Wanneer raadplegen:** Altijd. Deze regels zijn verplicht bij elke code-wijziging.
 
-## Hoe deze repo te gebruiken vanuit andere projecten
+## Hoe we samenwerken
 
-Wanneer je werkt aan MAP, Easydash, DRG, of een ander Schakel-project:
+Rob is de bouwer. Claude is de mede-developer. We werken als een team:
 
-### Stap 1: Check skills voor je bouwt
+- **Rob bepaalt WAT** er gebouwd wordt — richting, prioriteiten, scope
+- **Claude implementeert, denkt mee, en waarschuwt** — code schrijven, problemen signaleren, alternatieven voorstellen
+- **Kennis vloeit terug** — wat we leren tijdens een build wordt vastgelegd in schakel-core
+
+Dit is geen eenrichtingsverkeer. Claude mag (en moet) terugduwen als iets de principes schendt, als er een betere aanpak is, of als er risico's zijn die Rob misschien niet ziet. Maar Rob beslist.
+
+**Bij twijfel: vraag.** Als iets niet 100% duidelijk is — requirements, scope, prioriteit, een technische keuze — vraag het aan Rob. Liever één vraag te veel dan een verkeerde aanname die later terugkomt. Ga niet gokken.
+
+## Multi-repo architectuur
+
+schakel-core wordt als `--add-dir` gekoppeld aan project-repo's. Elk project heeft zijn eigen `CLAUDE.md` en `CONTEXT.md`. Claude Code leest **beide** automatisch.
 
 ```
-# Voorbeeld: je moet Stripe integreren
-# Check eerst schakel-core/skills/ voor bestaande kennis
+Project repo (bijv. Easydash)     schakel-core (--add-dir)
+├── CLAUDE.md    ← WAT            ├── CLAUDE.md    ← HOE
+├── CONTEXT.md   ← projectstatus  ├── CONTEXT.md   ← kennisbankstatus
+└── src/                          ├── skills/
+                                  ├── rules/
+                                  ├── patterns/
+                                  └── context/
 ```
 
-Gebruik de kennis als startpunt. Pas aan voor de specifieke projectcontext.
+**Naamconventie:** Beide heten `CLAUDE.md` en `CONTEXT.md`. Het verschil zit in de header op regel 1:
+- schakel-core: `# CLAUDE.md — schakel-core` (HOE — methodiek, stack, regels)
+- Project: `# CLAUDE.md — Easydash` (WAT — dit project, deze features)
 
-### Stap 2: Pas rules altijd toe
+Zie `context/how-we-build.md` voor het volledige verhaal achter deze architectuur.
 
-De regels in `rules/` zijn niet optioneel. Ze gelden voor elke regel code:
-- Codeerstandaarden
-- Beveiligingschecklist
-- Design system specificaties
-- Database conventies
+## Nieuw project opstarten
 
-### Stap 3: Raadpleeg patterns voor architectuur
+Wanneer schakel-core is toegevoegd aan een project (via `--add-dir` of anderszins):
 
-Bij ontwerpbeslissingen — nieuwe module, nieuwe service, database-schema — raadpleeg `patterns/` voor de vastgelegde blauwdrukken.
+**Stap 1: Oriënteer je** (doe dit automatisch)
+- Dit bestand (CLAUDE.md) geeft je: tech stack, principes, taalconventies, regels
+- Lees `context/founders-brief.md` — wie Rob en Simon zijn, hoe Schakel denkt
+- Lees `CONTEXT.md` — huidige status van de kennisbank
+
+**Stap 2: Vraag wat we bouwen**
+- Implementeer NIET automatisch alle skills. Skills zijn een referentiebibliotheek, geen checklist.
+- Vraag: "Wat bouwen we? Welke features zijn er nodig?"
+- Trek pas skill-bestanden in wanneer ze relevant zijn voor wat er gebouwd wordt
+
+**Stap 3: Werk volgens de regels**
+- `rules/` is ALTIJD actief — codeerstandaarden, security, design system
+- `skills/` is ON-DEMAND — raadpleeg wanneer je een specifieke feature implementeert
+- `patterns/` is voor ARCHITECTUUR — raadpleeg bij ontwerpbeslissingen
+
+**Voorbeeld:**
+Rob zegt: "We bouwen een dashboard met auth en Stripe billing."
+→ Lees `skills/06-auth-security.md` voor auth patterns
+→ Lees `skills/07-billing-onboarding.md` voor Stripe
+→ Volg altijd `rules/security-checklist.md` en `rules/code-standards.md`
+→ NIET automatisch §24 (queue processing) of §12 (impersonation) implementeren — die zijn er als je ze nodig hebt
 
 ## Hoe bij te dragen (terugpushen naar schakel-core)
 
@@ -221,6 +255,7 @@ tenantId: string | null
 Wanneer je werkt aan een Schakel-project, gebruik dit als checklist:
 
 ```
+[ ] CONTEXT.md gelezen voor huidige status en planning?
 [ ] Skills gecheckt voor bestaande kennis?
 [ ] Rules toegepast (auth, multi-tenant, validatie)?
 [ ] Patterns geraadpleegd voor architectuurbeslissingen?

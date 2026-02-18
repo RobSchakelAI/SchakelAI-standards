@@ -17,6 +17,7 @@ Zonder schakel-core is kennis ad-hoc — verspreid over chats, commit messages, 
 ```
 schakel-core/
 ├── CLAUDE.md          # AI assistant instructies
+├── CONTEXT.md         # Status, planning, to-do's
 ├── README.md          # Dit bestand
 ├── skills/            # Hoe je iets bouwt (on-demand)
 │   ├── 00-introduction.md           # Intro, brownfield guide, architectuuroverzicht
@@ -39,8 +40,9 @@ schakel-core/
 │   └── design-system.md             # Design richtlijnen
 │
 ├── context/           # Wie we zijn, visie, strategie
-│   ├── founders-brief.md            # Founders Context Brief
-│   └── vision.md                    # Van AI Agency naar Managed Operations Partner
+│   ├── founders-brief.md            # WIE — Founders Context Brief
+│   ├── vision.md                    # WAAR — Van AI Agency naar Managed Operations Partner
+│   └── how-we-build.md             # HOE — Ontwikkelmethode & multi-repo architectuur
 │
 └── harvest/           # Radar scan output (drafts)
     └── radar.md               # Externe scan-configuratie
