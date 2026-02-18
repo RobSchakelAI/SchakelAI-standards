@@ -17,6 +17,7 @@ Zonder schakel-core is kennis ad-hoc — verspreid over chats, commit messages, 
 ```
 schakel-core/
 ├── CLAUDE.md          # AI assistant instructies
+├── CONTEXT.md         # Status, planning, to-do's
 ├── README.md          # Dit bestand
 ├── skills/            # Hoe je iets bouwt (on-demand)
 │   ├── 00-introduction.md           # Intro, brownfield guide, architectuuroverzicht

@@ -13,6 +13,7 @@ Elk Schakel-project (MAP, Easydash, DRG, LinkedIn-tool, etc.) haalt kennis uit d
 ```
 schakel-core/
 ├── CLAUDE.md          # Dit bestand — AI-assistentinstructies
+├── CONTEXT.md         # Status, planning, to-do's van deze repo
 ├── README.md          # Wat deze repo is, waarom, hoe te gebruiken
 ├── skills/            # Actionable how-to kennis (on-demand, pull wanneer nodig)
 ├── patterns/          # Architectuur-referentiedocumenten (blauwdrukken, ontwerpen)
@@ -221,6 +222,7 @@ tenantId: string | null
 Wanneer je werkt aan een Schakel-project, gebruik dit als checklist:
 
 ```
+[ ] CONTEXT.md gelezen voor huidige status en planning?
 [ ] Skills gecheckt voor bestaande kennis?
 [ ] Rules toegepast (auth, multi-tenant, validatie)?
 [ ] Patterns geraadpleegd voor architectuurbeslissingen?
