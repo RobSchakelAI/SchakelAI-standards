@@ -18,8 +18,8 @@
 - [ ] `null` = bewuste superadmin/system bypass
 - [ ] PostgreSQL Row Level Security (RLS) op alle tenant-scoped tabellen
 - [ ] RLS policies gebruiken `current_setting('app.tenant_id')` via `set_tenant_context()`
-- [ ] File storage paths bevatten tenant prefix (`{tenantId}/{werkruimteId}/...`)
-- [ ] Tier limits gehandhaafd per subscription (meetings, users, werkruimtes)
+- [ ] File storage paths bevatten tenant prefix (`{tenantId}/...`)
+- [ ] Tier limits gehandhaafd per subscription (items, users)
 
 ## Input Validatie
 

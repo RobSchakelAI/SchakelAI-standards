@@ -14,7 +14,7 @@ Dit document is het technische antwoord op het visiedocument "Van AI Agency naar
 Het combineert:
 - De strategische visie (Managed Operations Centers voor het MKB)
 - De technische lessen uit MAP (Meeting Automation Platform)
-- De gecodificeerde patronen uit B2B-SAAS-SKILLS
+- De gecodificeerde patronen uit B2B SaaS Infrastructure Skills
 - De Founders Context Brief (wie we zijn en hoe we denken)
 - **Schakel Scout** (het kennisbeheersysteem dat het compounding effect aandrijft)
 - Ontwerprichtlijnen en deployment-ervaring
@@ -83,7 +83,7 @@ Een kleermaker met standaardpatronen voor jasjes, broeken en vesten. Elke klant 
 ```
 schakel-platform/
 ├── core/                          # Schakel Core — het fundament
-│   ├── auth/                      # Session-based auth, MFA, CSRF, passport.js
+│   ├── auth/                      # Session-based auth, MFA, CSRF
 │   ├── billing/                   # Stripe subscriptions, checkout, portal
 │   ├── multi-tenancy/             # RLS, tenant isolation, tenant context
 │   ├── storage/                   # Database layer, withTenant(), migrations
@@ -141,10 +141,11 @@ schakel-platform/
 │   └── ops-center/                # Operations Center build target
 │       └── build.ts               # Leest client config, produceert tailored build
 │
-├── standards/                     # Dit standards repo (als submodule of symlink)
-│   ├── B2B-SAAS-SKILLS.md
-│   ├── SCHAKEL-PLATFORM-BLUEPRINT.md  (dit document)
-│   └── ...
+├── standards/                     # schakel-core repo (als submodule of symlink)
+│   ├── skills/                    # B2B SaaS Infrastructure Skills (10 bestanden)
+│   ├── patterns/                  # Architectuur referenties (incl. dit document)
+│   ├── rules/                     # Codeerstandaarden, security, design system
+│   └── context/                   # Visie, founders brief
 │
 └── shared/                        # Gedeelde types, schemas, utilities
     ├── schema.ts                  # Zod schemas, Drizzle tables, TypeScript types
@@ -154,7 +155,7 @@ schakel-platform/
 
 ### Schakel Core
 
-Het fundament onder elk product. Geëxtraheerd uit MAP's productie-gevalideerde code en gecodificeerd in B2B-SAAS-SKILLS.
+Het fundament onder elk product. Geëxtraheerd uit MAP's productie-gevalideerde code en gecodificeerd in B2B SaaS Infrastructure Skills.
 
 **Niet-onderhandelbare principes:**
 
@@ -532,7 +533,7 @@ Dag 14: Live
 | **Styling** | TailwindCSS + shadcn/ui | MAP, LinkedIn |
 | **Backend** | Node.js + Express + TypeScript | MAP |
 | **Database** | PostgreSQL (Supabase) + Drizzle ORM | MAP |
-| **Auth** | Session-based (passport.js) + CSRF + MFA | MAP |
+| **Auth** | Session-based (express-session) + CSRF + MFA | MAP |
 | **Betalingen** | Stripe (subscriptions, checkout, portal) | MAP |
 | **AI** | Anthropic Claude API | MAP, alle projecten |
 | **File Storage** | Supabase Storage (signed URLs) | MAP |
@@ -554,7 +555,7 @@ Dag 14: Live
 
 1. **Bewezen**: MAP draait in productie met deze stack. Geen experimenten.
 2. **AI-vriendelijk**: Claude Code kent deze stack uitstekend. Maximale productiviteit.
-3. **Compounding**: Elke build in deze stack verrijkt B2B-SAAS-SKILLS en het platform.
+3. **Compounding**: Elke build in deze stack verrijkt B2B SaaS Infrastructure Skills en het platform.
 4. **MKB-passend**: Geen overkill. Geen Kubernetes. Geen microservices. Gewoon goede, begrijpelijke architectuur die twee mensen (+ AI) kunnen onderhouden.
 
 ---
@@ -738,7 +739,7 @@ Platform projecten consumeren schakel-core:
   DRG:      git pull → .claude/skills/, .claude/rules/
 ```
 
-B2B-SAAS-SKILLS (het 276KB document) wordt op termijn **opgesplitst** in individuele skills en patterns binnen schakel-core, beheerd via de Scout. Het document blijft bestaan als referentie, maar de levende kennis zit in schakel-core.
+De B2B SaaS Infrastructure Skills zijn **opgesplitst** in 10 bestanden in `skills/` (van `00-introduction.md` tot `09-build-deploy.md`). Op termijn worden deze verder verfijnd in individuele skills en patterns, beheerd via de Scout.
 
 ### Bouwvolgorde Scout (geschat: 15-20 uur)
 
@@ -786,7 +787,7 @@ Claude Code is niet "een tool die Rob gebruikt." Claude is de facto de derde dev
 - Security checklist
 - Beschikbare commando's
 
-**Per platform: B2B-SAAS-SKILLS** als de technische bijbel die Claude raadpleegt voor:
+**Per platform: B2B SaaS Infrastructure Skills** als de technische bijbel die Claude raadpleegt voor:
 - Auth patronen (session-based, MFA, CSRF)
 - Multi-tenancy (RLS, tenant isolation)
 - Stripe billing
@@ -795,7 +796,7 @@ Claude Code is niet "een tool die Rob gebruikt." Claude is de facto de derde dev
 - Migration strategieën
 
 **De compound interest van documentatie:**
-Elke keer dat Rob een probleem oplost, wordt de oplossing gedocumenteerd in B2B-SAAS-SKILLS of in de relevante module docs. De volgende keer dat Claude (of een toekomstige developer) hetzelfde probleem tegenkomt, is de oplossing er al. Dit is hoe twee mensen het werk doen van tien.
+Elke keer dat Rob een probleem oplost, wordt de oplossing gedocumenteerd in B2B SaaS Infrastructure Skills of in de relevante module docs. De volgende keer dat Claude (of een toekomstige developer) hetzelfde probleem tegenkomt, is de oplossing er al. Dit is hoe twee mensen het werk doen van tien.
 
 ---
 
@@ -884,7 +885,7 @@ Platform update beschikbaar
 
 ## 11. Kwaliteitsstandaarden
 
-### Overgenomen uit B2B-SAAS-SKILLS (productie-gevalideerd)
+### Overgenomen uit B2B SaaS Infrastructure Skills (productie-gevalideerd)
 
 **Security:**
 - Session-based auth met CSRF — geen JWT in localStorage
@@ -930,7 +931,7 @@ Platform update beschikbaar
 
 | Risico | Impact | Mitigatie |
 |--------|--------|----------|
-| Rob uitvalt | Alles stopt | Claude Code kan codebase onderhouden. Simon kan beperkt bijsturen. Modulaire architectuur maakt inwerken junior dev makkelijker. B2B-SAAS-SKILLS documenteert alles. |
+| Rob uitvalt | Alles stopt | Claude Code kan codebase onderhouden. Simon kan beperkt bijsturen. Modulaire architectuur maakt inwerken junior dev makkelijker. B2B SaaS Infrastructure Skills documenteert alles. |
 | AI agents vervangen ons | Business model vervalt | Per-client deployment met eigen data, integratie-complexiteit, en menselijk aanspreekpunt zijn niet automatiseerbaar. Focus op operationeel beheer, niet alleen bouwen. |
 | Platform wordt te complex | Nieuwe klanten worden moeilijker | Strikte module-grenzen. Elke module is onafhankelijk testbaar. Config-driven, niet code-driven. |
 | Klant wil iets wat niet in modules past | Scope creep | Duidelijk onderscheid: configuratie (goedkoop) vs. nieuwe module (investering die terugvloeit naar platform). Simon managet verwachtingen. |
@@ -955,7 +956,7 @@ Platform update beschikbaar
 8. **Scout v1 bouwen** (15-20 uur — zie sectie 7)
 9. **schakel-core repo** aanmaken met initiële content (bestaande skills/rules migreren)
 10. **Wekelijkse harvest** activeren — elke maandag review van externe inzichten
-11. **B2B-SAAS-SKILLS opsplitsen** in individuele skills/rules/patterns in schakel-core
+11. **B2B SaaS Infrastructure Skills opsplitsen** in individuele skills/rules/patterns in schakel-core
 
 ### Parallel: MAP en LinkedIn als SaaS
 
@@ -988,28 +989,34 @@ Platform update beschikbaar
 | **Module** | Een zelfstandige functionele eenheid (taken, uren, facturatie, etc.) |
 | **Operations Center** | Een op maat geconfigureerd systeem voor een MKB-klant |
 | **Client Config** | Het configuratiebestand dat bepaalt hoe het platform zich gedraagt voor een klant |
-| **B2B-SAAS-SKILLS** | Het technische naslagwerk met productie-gevalideerde patronen |
+| **B2B SaaS Infrastructure Skills** | Het technische naslagwerk met productie-gevalideerde patronen (10 bestanden in `skills/`) |
 | **Schakel Scout** | Interne web-app die schakel-core beheert: kennishub + geautomatiseerde externe harvest |
 | **schakel-core** | Private GitHub repo met skills, rules en patterns — de levende kennisbasis |
 | **Pak-metafoor** | Standaard patronen, unieke combinaties per klant |
 | **Compounding** | Elke build verrijkt het platform, elke volgende build gaat sneller |
 | **Managed Operations Partner** | Schakels positionering: niet projecten opleveren, maar systemen beheren |
 
-## Appendix B: Document hiërarchie
+## Appendix B: Repository structuur
 
 ```
-Schakel documentatie (dit standards repo)
-├── SCHAKEL-PLATFORM-BLUEPRINT.md     ← DIT DOCUMENT (architectuur + strategie)
-├── B2B-SAAS-SKILLS.md                ← Technische bijbel (code patronen)
-├── input_raw/
-│   ├── Founders Context Brief.docx   ← Wie we zijn (voor mensen + AI)
-│   ├── Visie document.pdf            ← Waar we naartoe gaan
-│   ├── CONTEXT.md                    ← MAP-specifiek: huidige status
-│   ├── CLAUDE.md                     ← MAP-specifiek: AI assistant context
-│   ├── API.md                        ← MAP-specifiek: endpoint referentie
-│   ├── SECURITY.md                   ← MAP-specifiek: security audit
-│   ├── DEPLOYMENT.md                 ← Deployment handleiding
-│   ├── TESTING-CHECKLIST.md          ← Handmatige test procedure
-│   └── design_guidelines.md          ← Visueel ontwerp richtlijnen
-└── (Noveloper docs)                  ← Historisch, vervangen door bovenstaande
+schakel-core/
+├── CLAUDE.md                         ← AI-assistentinstructies
+├── README.md                         ← Wat deze repo is
+├── skills/                           ← B2B SaaS Infrastructure Skills (10 bestanden)
+│   ├── 00-introduction.md            ← Intro, brownfield guide, architectuuroverzicht
+│   ├── 01-project-setup.md           ← §1 Dependencies & config
+│   ├── 02-database-schema.md         ← §2 SQL tabellen & indexes
+│   ├── ...                           ← §3-27 (zie skills/README.md)
+│   └── 09-build-deploy.md            ← §25-27 Build & deploy
+├── patterns/
+│   └── platform-blueprint.md         ← DIT DOCUMENT
+├── rules/
+│   ├── code-standards.md             ← Code conventies
+│   ├── security-checklist.md         ← Security vereisten
+│   └── design-system.md              ← Design richtlijnen
+├── context/
+│   ├── founders-brief.md             ← Wie we zijn
+│   └── vision.md                     ← Strategische visie
+└── harvest/
+    └── radar.md                      ← Externe scan-configuratie
 ```

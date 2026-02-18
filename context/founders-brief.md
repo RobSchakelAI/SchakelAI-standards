@@ -39,11 +39,11 @@ De combinatie is complementair. Simon ontleedt een bedrijfsproces en identificee
 
 ### Fase 1: Uitzoeken wat we zijn (september – oktober 2025)
 
-Founders Alignment Document. Persoonlijke drijfveren, financiele ambities, rolverdeling, waarden. De missie was generiek: "echte, concrete AI-oplossingen bieden aan ondernemers."
+Founders Alignment Document. Persoonlijke drijfveren, financiële ambities, rolverdeling, waarden. De missie was generiek: "echte, concrete AI-oplossingen bieden aan ondernemers."
 
 ### Fase 2: Alle kanten op rennen (november 2025)
 
-Na twee maanden experimenteren: effectief, maar niet efficient. Focus op custom AI-oplossingen en een audit framework als gestructureerde instap.
+Na twee maanden experimenteren: effectief, maar niet efficiënt. Focus op custom AI-oplossingen en een audit framework als gestructureerde instap.
 
 ### Fase 3: De identiteitsshift (december 2025)
 

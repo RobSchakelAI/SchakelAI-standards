@@ -19,7 +19,16 @@ schakel-core/
 ├── CLAUDE.md          # AI assistant instructies
 ├── README.md          # Dit bestand
 ├── skills/            # Hoe je iets bouwt (on-demand)
-│   └── B2B-SAAS-INFRASTRUCTURE.md   # Comprehensive skills reference (276KB)
+│   ├── 00-introduction.md           # Intro, brownfield guide, architectuuroverzicht
+│   ├── 01-project-setup.md          # §1 Dependencies & config
+│   ├── 02-database-schema.md        # §2 SQL tabellen & indexes
+│   ├── 03-shared-types.md           # §3 TypeScript types & Zod schemas
+│   ├── 04-storage-interface.md      # §4 IStorage pattern
+│   ├── 05-multi-tenancy.md          # §5-6 Multi-tenancy & RLS
+│   ├── 06-auth-security.md          # §7-12 Auth, CSRF, MFA
+│   ├── 07-billing-onboarding.md     # §13-17 Billing & onboarding
+│   ├── 08-platform-quality.md       # §18-24 Error handling, audit, GDPR
+│   └── 09-build-deploy.md           # §25-27 Build & deploy
 │
 ├── patterns/          # Architectuur referenties
 │   └── platform-blueprint.md        # Schakel Platform Blueprint
@@ -34,8 +43,7 @@ schakel-core/
 │   └── vision.md                    # Van AI Agency naar Managed Operations Partner
 │
 └── harvest/           # Radar scan output (drafts)
-    ├── radar.md               # Externe scan-configuratie
-    └── .gitkeep
+    └── radar.md               # Externe scan-configuratie
 ```
 
 ### Drie kennistypes
@@ -51,7 +59,7 @@ schakel-core/
 **Als AI-assistent (Claude Code):**
 ```
 # Voordat je een feature bouwt:
-"Lees skills/B2B-SAAS-INFRASTRUCTURE.md sectie X voor de referentie-implementatie"
+"Lees skills/06-auth-security.md voor de referentie-implementatie van auth"
 
 # Bij elke build:
 "Volg rules/code-standards.md en rules/security-checklist.md"
@@ -63,7 +71,7 @@ schakel-core/
 **Na een build — kennis terugpushen:**
 ```
 "Push dit als nieuw pattern naar schakel-core"
-"Update skills/B2B-SAAS-INFRASTRUCTURE.md met deze learning"
+"Update het relevante skills-bestand met deze learning"
 "Voeg dit toe aan rules/security-checklist.md"
 ```
 

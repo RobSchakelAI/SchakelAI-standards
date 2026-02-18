@@ -33,7 +33,7 @@ Voorbeelden:
 - "Hoe zet je Stripe billing op"
 - "Hoe configureer je multi-tenant RLS in PostgreSQL"
 
-Het hoofddocument is `skills/B2B-SAAS-INFRASTRUCTURE.md` — een uitgebreide referentie (~276KB) die 27 secties bestrijkt, van schema-ontwerp tot deployment.
+De skills zijn opgesplitst in 10 bestanden in `skills/` — van project setup tot deployment. Zie `skills/README.md` voor het overzicht.
 
 **Wanneer raadplegen:** Voor je een feature implementeert, controleer of er een skill voor bestaat.
 

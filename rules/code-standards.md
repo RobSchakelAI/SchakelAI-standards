@@ -29,7 +29,7 @@
 
 ## Backend (Express)
 
-- **Route pattern**: Router per domein (`routes/meetings.ts`, `routes/billing.ts`).
+- **Route pattern**: Router per domein (`routes/items.ts`, `routes/tenants.ts`).
 - **Storage layer pattern**: Alle database-operaties via storage interface met `tenantId` parameter.
 - **Error handling**: Gebruik `ApiError` met gecentraliseerde error codes.
 - **Middleware volgorde**: CORS → helmet → session → CSRF → routes.
@@ -37,7 +37,7 @@
 
 ## API Design
 
-- **RESTful**: `GET /api/meetings`, `POST /api/meetings`, `PATCH /api/meetings/:id`.
+- **RESTful**: `GET /api/items`, `POST /api/items`, `PATCH /api/items/:id`.
 - **Consistent error format**: `{ error: string, code?: string }`.
 - **Paginatie**: `?page=1&limit=20` met response `{ data: [], total: number }`.
 - **Tenant-scoping**: Elke query filtert op tenantId. Geen uitzonderingen behalve superadmin.
