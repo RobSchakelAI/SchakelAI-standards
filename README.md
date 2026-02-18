@@ -40,8 +40,9 @@ schakel-core/
 │   └── design-system.md             # Design richtlijnen
 │
 ├── context/           # Wie we zijn, visie, strategie
-│   ├── founders-brief.md            # Founders Context Brief
-│   └── vision.md                    # Van AI Agency naar Managed Operations Partner
+│   ├── founders-brief.md            # WIE — Founders Context Brief
+│   ├── vision.md                    # WAAR — Van AI Agency naar Managed Operations Partner
+│   └── how-we-build.md             # HOE — Ontwikkelmethode & multi-repo architectuur
 │
 └── harvest/           # Radar scan output (drafts)
     └── radar.md               # Externe scan-configuratie

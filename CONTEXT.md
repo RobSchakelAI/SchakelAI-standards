@@ -16,7 +16,7 @@ schakel-core is operationeel als kennisbank. Alle Schakel-projecten (MAP, Easyda
 | **Skills** (10 bestanden) | Compleet | B2B SaaS Infrastructure Skills v2.8, opgesplitst in `00-introduction` t/m `09-build-deploy` |
 | **Patterns** | Eerste versie | `platform-blueprint.md` v0.2 — architectuur + Scout concept |
 | **Rules** | Compleet | `code-standards.md`, `security-checklist.md`, `design-system.md` |
-| **Context** | Compleet | `founders-brief.md`, `vision.md` |
+| **Context** | Compleet | `founders-brief.md`, `vision.md`, `how-we-build.md` |
 | **Harvest** | Alleen config | `radar.md` met scan-gebieden, nog geen output |
 
 ### Wat er nog niet is
@@ -33,6 +33,8 @@ schakel-core is operationeel als kennisbank. Alle Schakel-projecten (MAP, Easyda
 | Datum | Wijziging |
 |-------|-----------|
 | 18 feb 2026 | Skills opgesplitst van 1 monoliet (276KB) naar 10 bestanden |
+| 18 feb 2026 | `context/how-we-build.md` toegevoegd — ontwikkelmethode, multi-repo architectuur, kennisstroommodel |
+| 18 feb 2026 | Multi-repo architectuur sectie toegevoegd aan CLAUDE.md — naamconventie shared vs local bestanden |
 | 18 feb 2026 | Stale referenties opgeschoond (B2B-SAAS-SKILLS → correct, passport.js → express-session, MAP-specifieke voorbeelden → generiek) |
 | 17 feb 2026 | Schakel Scout geïntegreerd in platform-blueprint (v0.2) |
 | 17 feb 2026 | Repo geherstructureerd als schakel-core (skills/, patterns/, rules/, context/, harvest/) |

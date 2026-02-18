@@ -72,6 +72,26 @@ Dit is geen eenrichtingsverkeer. Claude mag (en moet) terugduwen als iets de pri
 
 **Bij twijfel: vraag.** Als iets niet 100% duidelijk is — requirements, scope, prioriteit, een technische keuze — vraag het aan Rob. Liever één vraag te veel dan een verkeerde aanname die later terugkomt. Ga niet gokken.
 
+## Multi-repo architectuur
+
+schakel-core wordt als `--add-dir` gekoppeld aan project-repo's. Elk project heeft zijn eigen `CLAUDE.md` en `CONTEXT.md`. Claude Code leest **beide** automatisch.
+
+```
+Project repo (bijv. Easydash)     schakel-core (--add-dir)
+├── CLAUDE.md    ← WAT            ├── CLAUDE.md    ← HOE
+├── CONTEXT.md   ← projectstatus  ├── CONTEXT.md   ← kennisbankstatus
+└── src/                          ├── skills/
+                                  ├── rules/
+                                  ├── patterns/
+                                  └── context/
+```
+
+**Naamconventie:** Beide heten `CLAUDE.md` en `CONTEXT.md`. Het verschil zit in de header op regel 1:
+- schakel-core: `# CLAUDE.md — schakel-core` (HOE — methodiek, stack, regels)
+- Project: `# CLAUDE.md — Easydash` (WAT — dit project, deze features)
+
+Zie `context/how-we-build.md` voor het volledige verhaal achter deze architectuur.
+
 ## Nieuw project opstarten
 
 Wanneer schakel-core is toegevoegd aan een project (via `--add-dir` of anderszins):
