@@ -1,1 +1,0 @@
-Please replace this text with your MailerSend API key, and I'll read it from here and set it as an environment variable.
